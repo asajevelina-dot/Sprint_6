@@ -1,0 +1,21 @@
+# Виртуальное окружение
+venv/
+
+# Кэш Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Allure отчёты
+allure_results/
+allure-report/
+
+# Драйверы браузеров
+geckodriver.exe
+chromedriver.exe
+
+# VS Code
+.vscode/
+
+# Логи
+*.log
