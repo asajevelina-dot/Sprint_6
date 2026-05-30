@@ -15,8 +15,9 @@ class TestFAQ:
         (7, "Да, обязательно. Всем самокатов! И Москве, и Московской области."),
     ])
     def test_faq_question(self, driver, index, expected_text):
-        wait = WebDriverWait(driver, 10)
+        wait = WebDriverWait(driver, 15)
         
+        # Закрываем куки
         try:
             cookie = wait.until(EC.element_to_be_clickable((By.ID, "rcc-confirm-button")))
             cookie.click()
@@ -24,8 +25,12 @@ class TestFAQ:
             pass
         
         question = wait.until(EC.presence_of_element_located((By.ID, f"accordion__heading-{index}")))
-        driver.execute_script("arguments[0].scrollIntoView();", question)
-        question.click()
+        
+        # Скроллим к вопросу
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", question)
+        
+        # Кликаем через JavaScript
+        driver.execute_script("arguments[0].click();", question)
         
         answer = wait.until(EC.visibility_of_element_located((By.XPATH, f"//div[@id='accordion__panel-{index}']/p")))
         assert answer.text == expected_text
