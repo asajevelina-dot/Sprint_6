@@ -8,3 +8,5 @@ allure-report/
 *.log
 geckodriver.exe
 chromedriver.exe
+CACHEDIR.TAG
+data.py
