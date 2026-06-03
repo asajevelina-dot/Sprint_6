@@ -4,6 +4,7 @@ from locators.main_page_locators import MainPageLocators
 from selenium.webdriver.support import expected_conditions as EC
 
 class MainPage(BasePage):
+    
     @allure.step("Закрыть куки")
     def accept_cookies(self):
         try:
@@ -31,3 +32,28 @@ class MainPage(BasePage):
         locator = (MainPageLocators.ANSWER[0], MainPageLocators.ANSWER[1].format(index))
         answer = self.wait.until(EC.visibility_of_element_located(locator))
         return answer.text
+    
+    # НОВЫЕ МЕТОДЫ ДЛЯ ЛОГОТИПОВ
+    @allure.step("Кликнуть на логотип Самоката")
+    def click_scooter_logo(self):
+        self.click_js(MainPageLocators.SCOOTER_LOGO)
+    
+    @allure.step("Кликнуть на логотип Яндекса")
+    def click_yandex_logo(self):
+        self.click_js(MainPageLocators.YANDEX_LOGO)
+    
+    @allure.step("Получить текущий URL")
+    def get_current_url(self):
+        return self.driver.current_url
+    
+    @allure.step("Переключиться на новое окно")
+    def switch_to_new_window(self):
+        self.wait.until(EC.number_of_windows_to_be(2))
+        windows = self.driver.window_handles
+        self.driver.switch_to.window(windows[-1])
+    
+    @allure.step("Закрыть текущее окно и вернуться обратно")
+    def close_current_window_and_switch_back(self):
+        self.driver.close()
+        windows = self.driver.window_handles
+        self.driver.switch_to.window(windows[0])

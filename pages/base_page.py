@@ -13,9 +13,12 @@ class BasePage:
         return self.driver.find_elements(*locator)
 
     def click_js(self, locator):
-        """Клик через JavaScript (игнорирует перекрытия)"""
         element = self.wait.until(EC.element_to_be_clickable(locator))
         self.driver.execute_script("arguments[0].click();", element)
+
+    def click(self, locator):
+        element = self.wait.until(EC.element_to_be_clickable(locator))
+        element.click()
 
     def send_keys(self, locator, text):
         element = self.wait.until(EC.presence_of_element_located(locator))

@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+
 class OrderPageLocators:
     # Поля ввода
     NAME_INPUT = (By.XPATH, "//input[@placeholder='* Имя']")
@@ -13,14 +14,13 @@ class OrderPageLocators:
     ORDER_BUTTON = (By.XPATH, "//button[contains(text(), 'Заказать')]")
     CONFIRM_BUTTON = (By.XPATH, "//button[contains(text(), 'Да')]")
     
+    # Станции метро (универсальный поиск)
+    @staticmethod
+    def metro_station(station_name):
+        return (By.XPATH, f"//li//div[contains(text(), '{station_name}')]")
+    
     # Сообщения об ошибках
     NAME_ERROR = (By.XPATH, "//div[contains(@class, 'Input_ErrorMessage') and contains(text(), 'Введите корректное имя')]")
     SURNAME_ERROR = (By.XPATH, "//div[contains(@class, 'Input_ErrorMessage') and contains(text(), 'Введите корректную фамилию')]")
     ADDRESS_ERROR = (By.XPATH, "//div[contains(@class, 'Input_ErrorMessage') and contains(text(), 'Введите корректный адрес')]")
-    METRO_ERROR = (By.XPATH, "//div[contains(@class, 'Order_MetroError') and contains(text(), 'Выберите станцию')]")
     PHONE_ERROR = (By.XPATH, "//div[contains(@class, 'Input_ErrorMessage') and contains(text(), 'Введите корректный номер')]")
-    
-    # Станции метро (универсальный поиск)
-    @staticmethod
-    def metro_station(station_name):
-        return (By.XPATH, f"//button[contains(text(), '{station_name}')]")
