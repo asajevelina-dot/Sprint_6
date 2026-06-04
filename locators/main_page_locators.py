@@ -12,3 +12,6 @@ class MainPageLocators:
     # НОВЫЕ ЛОКАТОРЫ ДЛЯ ЛОГОТИПОВ
     SCOOTER_LOGO = (By.XPATH, "//img[@alt='Scooter']")
     YANDEX_LOGO = (By.XPATH, "//img[@alt='Yandex']")
+        # Локаторы для логотипов
+    SCOOTER_LOGO = (By.XPATH, "//img[@alt='Scooter']")
+    YANDEX_LOGO = (By.XPATH, "//img[@alt='Yandex']")

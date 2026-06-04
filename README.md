@@ -27,13 +27,10 @@ Sprint_6/
 ├── README.md
 └── requirements.txt
 
-text
 
 ### Запуск всех тестов:
-```bash
 pytest tests/ -v
 Запуск отдельных тестов:
-bash
 # Тесты FAQ
 pytest tests/test_faq.py -v
 
@@ -45,15 +42,16 @@ pytest tests/test_order_validation.py -v
 
 # Тесты логотипов
 pytest tests/test_redirects.py -v
-Генерация Allure-отчёта:
-bash
+
+### Генерация Allure-отчёта:
+```bash
 pytest tests/ --alluredir=allure_results
 allure serve allure_results
-Требования:
+
+### Требования:
 Python 3.14+
 
 Firefox браузер
 
-Установка зависимостей:
-bash
+### Установка зависимостей:
 pip install -r requirements.txt

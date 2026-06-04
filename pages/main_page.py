@@ -3,6 +3,7 @@ from pages.base_page import BasePage
 from locators.main_page_locators import MainPageLocators
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class MainPage(BasePage):
     
     @allure.step("Закрыть куки")
@@ -17,7 +18,7 @@ class MainPage(BasePage):
         if position == "top":
             self.click_js(MainPageLocators.ORDER_BUTTON_TOP)
         else:
-            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            self.scroll_to_bottom()
             self.click_js(MainPageLocators.ORDER_BUTTON_BOTTOM)
 
     @allure.step("Открыть вопрос {index}")
@@ -33,7 +34,6 @@ class MainPage(BasePage):
         answer = self.wait.until(EC.visibility_of_element_located(locator))
         return answer.text
     
-    # НОВЫЕ МЕТОДЫ ДЛЯ ЛОГОТИПОВ
     @allure.step("Кликнуть на логотип Самоката")
     def click_scooter_logo(self):
         self.click_js(MainPageLocators.SCOOTER_LOGO)
@@ -42,18 +42,6 @@ class MainPage(BasePage):
     def click_yandex_logo(self):
         self.click_js(MainPageLocators.YANDEX_LOGO)
     
-    @allure.step("Получить текущий URL")
-    def get_current_url(self):
-        return self.driver.current_url
-    
-    @allure.step("Переключиться на новое окно")
-    def switch_to_new_window(self):
-        self.wait.until(EC.number_of_windows_to_be(2))
-        windows = self.driver.window_handles
-        self.driver.switch_to.window(windows[-1])
-    
-    @allure.step("Закрыть текущее окно и вернуться обратно")
-    def close_current_window_and_switch_back(self):
-        self.driver.close()
-        windows = self.driver.window_handles
-        self.driver.switch_to.window(windows[0])
+    @allure.step("Ожидать открытия нового окна")
+    def wait_for_new_window(self, expected_count=2):
+        self.wait.until(EC.number_of_windows_to_be(expected_count))
