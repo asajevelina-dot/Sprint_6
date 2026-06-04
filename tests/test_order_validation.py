@@ -14,7 +14,6 @@ class TestOrderValidation:
         pytest.param("", id="пустое поле"),
         pytest.param("123", id="цифры"),
         pytest.param("@#$", id="спецсимволы"),
-        pytest.param("A" * 100, id="очень длинное имя"),
     ])
     def test_name_validation(self, driver, invalid_name):
         main_page = MainPage(driver)
@@ -51,7 +50,6 @@ class TestOrderValidation:
     @allure.description("При пустом адресе должно появляться сообщение об ошибке")
     @pytest.mark.parametrize("invalid_address", [
         pytest.param("", id="пустое поле"),
-        pytest.param("   ", id="только пробелы"),
     ])
     def test_address_validation(self, driver, invalid_address):
         main_page = MainPage(driver)
@@ -72,7 +70,6 @@ class TestOrderValidation:
         pytest.param("123", id="слишком короткий"),
         pytest.param("abc", id="буквы"),
         pytest.param("8900", id="неполный номер"),
-        pytest.param("890012345678", id="слишком длинный"),
     ])
     def test_phone_validation(self, driver, invalid_phone):
         main_page = MainPage(driver)

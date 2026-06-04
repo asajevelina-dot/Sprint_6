@@ -1,6 +1,7 @@
 import allure
 from pages.base_page import BasePage
 from locators.order_page_locators import OrderPageLocators
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class OrderPage(BasePage):
@@ -30,19 +31,34 @@ class OrderPage(BasePage):
         self.click(OrderPageLocators.METRO_INPUT)
         self.click(OrderPageLocators.metro_station(station_name))
     
-    # Методы для проверки ошибок валидации
     @allure.step("Проверить ошибку для поля Имя")
     def is_name_error_displayed(self):
-        return self.find_element(OrderPageLocators.NAME_ERROR).is_displayed()
+        try:
+            self.wait.until(EC.visibility_of_element_located(OrderPageLocators.NAME_ERROR))
+            return True
+        except:
+            return False
     
     @allure.step("Проверить ошибку для поля Фамилия")
     def is_surname_error_displayed(self):
-        return self.find_element(OrderPageLocators.SURNAME_ERROR).is_displayed()
+        try:
+            self.wait.until(EC.visibility_of_element_located(OrderPageLocators.SURNAME_ERROR))
+            return True
+        except:
+            return False
     
     @allure.step("Проверить ошибку для поля Адрес")
     def is_address_error_displayed(self):
-        return self.find_element(OrderPageLocators.ADDRESS_ERROR).is_displayed()
+        try:
+            self.wait.until(EC.visibility_of_element_located(OrderPageLocators.ADDRESS_ERROR))
+            return True
+        except:
+            return False
     
     @allure.step("Проверить ошибку для поля Телефон")
     def is_phone_error_displayed(self):
-        return self.find_element(OrderPageLocators.PHONE_ERROR).is_displayed()
+        try:
+            self.wait.until(EC.visibility_of_element_located(OrderPageLocators.PHONE_ERROR))
+            return True
+        except:
+            return False
