@@ -41,7 +41,3 @@ class MainPage(BasePage):
     @allure.step("Кликнуть на логотип Яндекса")
     def click_yandex_logo(self):
         self.click_js(MainPageLocators.YANDEX_LOGO)
-    
-    @allure.step("Ожидать открытия нового окна")
-    def wait_for_new_window(self, expected_count=2):
-        self.wait.until(EC.number_of_windows_to_be(expected_count))

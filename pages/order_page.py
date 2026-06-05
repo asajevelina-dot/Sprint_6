@@ -1,4 +1,3 @@
-import time
 import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -8,7 +7,6 @@ from locators.order_page_locators import OrderPageLocators
 
 class OrderPage(BasePage):
     
-    # Форма "Для кого самокат"
     @allure.step("Заполнить поле Имя: {name}")
     def fill_name(self, name):
         self.send_keys(OrderPageLocators.NAME_INPUT, name)
@@ -34,18 +32,14 @@ class OrderPage(BasePage):
         self.click(OrderPageLocators.METRO_INPUT)
         self.click(OrderPageLocators.metro_station(station_name))
     
-    # Форма "Про аренду"
     @allure.step("Заполнить дату: {date}")
     def fill_date(self, date):
         self.send_keys(OrderPageLocators.DATE_INPUT, date)
-        time.sleep(0.5)
     
     @allure.step("Выбрать срок аренды: {rental_period}")
     def select_rental_period(self, rental_period):
-        self.driver.find_element(By.XPATH, "//body").click()
-        time.sleep(0.5)
+        self.click_body()
         self.click(OrderPageLocators.RENTAL_PERIOD_DROPDOWN)
-        time.sleep(0.5)
         locator = (By.XPATH, f"//div[contains(text(), '{rental_period}')]")
         self.click(locator)
     
@@ -63,7 +57,6 @@ class OrderPage(BasePage):
     @allure.step("Нажать кнопку Заказать")
     def click_order_button(self):
         self.click(OrderPageLocators.ORDER_BUTTON)
-        time.sleep(2)
     
     @allure.step("Подтвердить заказ (кнопка Да)")
     def confirm_order(self):
@@ -75,7 +68,6 @@ class OrderPage(BasePage):
     def is_order_successful(self):
         return self.find_element(OrderPageLocators.SUCCESS_MESSAGE).is_displayed()
     
-    # Методы для проверки ошибок валидации
     @allure.step("Проверить ошибку для поля Имя")
     def is_name_error_displayed(self):
         return self.find_element(OrderPageLocators.NAME_ERROR).is_displayed()
