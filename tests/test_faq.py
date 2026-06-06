@@ -1,9 +1,13 @@
-﻿from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+﻿import allure
 import pytest
+from pages.main_page import MainPage
 
+
+@allure.epic("Яндекс.Самокат")
+@allure.feature("Вопросы о важном")
 class TestFAQ:
+    
+    @allure.title("Проверка ответов на вопросы")
     @pytest.mark.parametrize("index, expected_text", [
         (0, "Сутки — 400 рублей. Оплата курьеру — наличными или картой."),
         (1, "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим."),
@@ -15,17 +19,8 @@ class TestFAQ:
         (7, "Да, обязательно. Всем самокатов! И Москве, и Московской области."),
     ])
     def test_faq_question(self, driver, index, expected_text):
-        wait = WebDriverWait(driver, 10)
-        
-        try:
-            cookie = wait.until(EC.element_to_be_clickable((By.ID, "rcc-confirm-button")))
-            cookie.click()
-        except:
-            pass
-        
-        question = wait.until(EC.presence_of_element_located((By.ID, f"accordion__heading-{index}")))
-        driver.execute_script("arguments[0].scrollIntoView();", question)
-        question.click()
-        
-        answer = wait.until(EC.visibility_of_element_located((By.XPATH, f"//div[@id='accordion__panel-{index}']/p")))
-        assert answer.text == expected_text
+        main_page = MainPage(driver)
+        main_page.accept_cookies()
+        main_page.open_question(index)
+        answer_text = main_page.get_answer_text(index)
+        assert answer_text == expected_text
