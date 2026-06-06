@@ -55,7 +55,6 @@ class TestOrderValidation:
         order_page.fill_address("")
         order_page.click_next()
         
-        # Тест падает, если ошибка не появляется — это ожидаемое поведение
         assert order_page.is_address_error_displayed()
     
     @allure.title("Проверка валидации поля Телефон")

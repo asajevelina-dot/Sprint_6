@@ -7,4 +7,3 @@ __pycache__/
 geckodriver.exe
 chromedriver.exe
 CACHEDIR.TAG
-data.py

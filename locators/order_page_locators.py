@@ -10,7 +10,6 @@ class OrderPageLocators:
     
     NEXT_BUTTON = (By.XPATH, "//button[contains(text(), 'Далее')]")
     ORDER_BUTTON = (By.XPATH, "//button[contains(text(), 'Заказать')]")
-    CONFIRM_BUTTON = (By.XPATH, "//button[contains(text(), 'Да')]")
     
     @staticmethod
     def metro_station(station_name):

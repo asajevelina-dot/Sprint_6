@@ -2,6 +2,7 @@ import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from locators.base_page_locators import BasePageLocators
 
 
 class BasePage:
@@ -12,10 +13,6 @@ class BasePage:
     @allure.step("Найти элемент")
     def find_element(self, locator):
         return self.driver.find_element(*locator)
-
-    @allure.step("Найти все элементы")
-    def find_elements(self, locator):
-        return self.driver.find_elements(*locator)
 
     @allure.step("Кликнуть на элемент")
     def click(self, locator):
@@ -55,7 +52,7 @@ class BasePage:
 
     @allure.step("Кликнуть по пустому месту")
     def click_body(self):
-        self.driver.find_element(By.XPATH, "//body").click()
+        self.click(BasePageLocators.BODY)
 
     @allure.step("Прокрутить страницу вниз")
     def scroll_to_bottom(self):
